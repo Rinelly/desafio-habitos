@@ -1,0 +1,66 @@
+@use '../../styles/tokens' as *;
+
+.seletor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.centro {
+  flex: 1;
+  text-align: center;
+
+  h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  p {
+    font-size: 0.8rem;
+    color: $texto-suave;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.seta {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: $branco;
+  box-shadow: $sombra;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: $roxo;
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+}
+
+.hoje {
+  background: $roxo;
+  color: $branco;
+  font-weight: 600;
+  font-size: 0.7rem;
+  padding: 2px 10px;
+  border-radius: $raio-pill;
+}
+
+.voltar {
+  border: none;
+  background: none;
+  padding: 0;
+  color: $roxo;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-decoration: underline;
+}

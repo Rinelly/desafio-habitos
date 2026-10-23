@@ -1,0 +1,97 @@
+@use '../../styles/tokens' as *;
+
+$azul: #4aa8ff;
+$azul-claro: #e8f4ff;
+
+.agua {
+  padding: 12px;
+  border-radius: 12px;
+  background: $azul-claro;
+  display: grid;
+  gap: 8px;
+
+  &[data-estado='cumpriu'] {
+    background: $verde-claro;
+  }
+  &[data-estado='falhou'] {
+    background: $vermelho-claro;
+  }
+}
+
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.titulo {
+  font-weight: 500;
+  font-size: 0.92rem;
+}
+
+.valor {
+  font-size: 0.85rem;
+  color: $texto-suave;
+
+  strong {
+    color: $texto;
+    font-size: 1rem;
+  }
+}
+
+.barra {
+  height: 10px;
+  background: $branco;
+  border-radius: $raio-pill;
+  overflow: hidden;
+
+  div {
+    height: 100%;
+    background: $azul;
+    border-radius: inherit;
+    transition: width 0.3s ease;
+
+    [data-estado='cumpriu'] & {
+      background: $verde;
+    }
+    [data-estado='falhou'] & {
+      background: $vermelho;
+    }
+  }
+}
+
+.rodape {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.legenda {
+  font-size: 0.75rem;
+  color: $texto-suave;
+  font-weight: 500;
+}
+
+.botoes {
+  display: flex;
+  gap: 6px;
+
+  button {
+    border: none;
+    background: $branco;
+    border-radius: $raio-pill;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: $roxo;
+
+    &:active {
+      transform: scale(0.95);
+    }
+    &:disabled {
+      opacity: 0.4;
+    }
+  }
+}

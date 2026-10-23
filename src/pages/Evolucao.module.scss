@@ -1,0 +1,143 @@
+@use '../styles/tokens' as *;
+
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+
+  h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+}
+
+.novo {
+  border: none;
+  background: $roxo;
+  color: $branco;
+  border-radius: $raio-pill;
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.pessoas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  background: $branco;
+  border-radius: $raio-pill;
+  padding: 4px;
+  margin-bottom: 12px;
+  box-shadow: $sombra;
+
+  button {
+    border: none;
+    background: transparent;
+    border-radius: $raio-pill;
+    padding: 8px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: $texto-suave;
+
+    &[aria-selected='true'] {
+      background: var(--cor);
+      color: $branco;
+    }
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+}
+
+.cartao {
+  @include cartao;
+  display: grid;
+  gap: 12px;
+  margin-bottom: 12px;
+  color: $texto;
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  p {
+    color: $texto-suave;
+    font-size: 0.88rem;
+  }
+
+  .novo {
+    justify-self: center;
+  }
+}
+
+.emoji {
+  font-size: 2.2rem;
+}
+
+.historico {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    background: $lilas;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: 0.85rem;
+
+    strong::first-letter {
+      text-transform: uppercase;
+    }
+
+    p {
+      font-size: 0.75rem;
+    }
+  }
+}
+
+.tag {
+  margin-left: 6px;
+  background: $roxo;
+  color: $branco;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 1px 8px;
+  border-radius: $raio-pill;
+}
+
+.acoes {
+  display: flex;
+  gap: 4px;
+
+  button {
+    border: none;
+    background: $branco;
+    color: $roxo;
+    border-radius: $raio-pill;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .apagar {
+    color: $vermelho;
+  }
+}
+
+.erro {
+  background: $vermelho-claro;
+  color: $vermelho;
+  font-size: 0.85rem;
+  padding: 10px 12px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}

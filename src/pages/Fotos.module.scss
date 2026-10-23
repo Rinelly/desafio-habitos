@@ -1,0 +1,81 @@
+@use '../styles/tokens' as *;
+
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+
+  h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+}
+
+.filtros {
+  display: flex;
+  gap: 6px;
+
+  button {
+    --cor: #{$roxo};
+    border: 2px solid var(--cor);
+    background: $branco;
+    color: var(--cor);
+    border-radius: $raio-pill;
+    padding: 4px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+
+    &[aria-pressed='true'] {
+      background: var(--cor);
+      color: $branco;
+    }
+  }
+}
+
+.adicionar {
+  margin-bottom: 16px;
+}
+
+.dia {
+  @include cartao;
+  margin-bottom: 12px;
+  display: grid;
+  gap: 10px;
+
+  h3 {
+    font-size: 0.92rem;
+    font-weight: 600;
+    &::first-letter {
+      text-transform: uppercase;
+    }
+
+    span {
+      color: $texto-suave;
+      font-weight: 400;
+    }
+  }
+}
+
+.vazio {
+  @include cartao;
+  text-align: center;
+  color: $texto-suave;
+  display: grid;
+  gap: 6px;
+
+  p:first-child {
+    font-size: 2rem;
+  }
+}
+
+.erro {
+  background: $vermelho-claro;
+  color: $vermelho;
+  font-size: 0.85rem;
+  padding: 10px 12px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}

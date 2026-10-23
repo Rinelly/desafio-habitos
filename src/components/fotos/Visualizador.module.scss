@@ -1,0 +1,82 @@
+@use '../../styles/tokens' as *;
+
+.fundo {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(20, 18, 32, 0.92);
+  display: grid;
+  place-items: center;
+  padding: 56px 12px 24px;
+}
+
+.figura {
+  margin: 0;
+  max-width: 900px;
+  width: 100%;
+  display: grid;
+  gap: 12px;
+
+  img {
+    width: 100%;
+    max-height: 72vh;
+    object-fit: contain;
+    border-radius: 12px;
+  }
+
+  figcaption {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    color: $branco;
+    font-size: 0.88rem;
+
+    p {
+      margin-top: 4px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+}
+
+.fechar,
+.seta {
+  position: absolute;
+  border: none;
+  background: rgba(255, 255, 255, 0.14);
+  color: $branco;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.3rem;
+}
+
+.fechar {
+  top: 12px;
+  right: 12px;
+}
+
+.seta {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.8rem;
+}
+
+.esq {
+  left: 8px;
+}
+
+.dir {
+  right: 8px;
+}
+
+.apagar {
+  border: none;
+  background: $vermelho;
+  color: $branco;
+  border-radius: $raio-pill;
+  padding: 6px 14px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}

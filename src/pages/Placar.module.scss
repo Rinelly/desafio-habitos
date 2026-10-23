@@ -1,0 +1,167 @@
+@use '../styles/tokens' as *;
+
+.titulo {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.faixa {
+  background: var(--cor);
+  color: $branco;
+  border-radius: $raio;
+  padding: 12px 16px;
+  font-size: 0.92rem;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.cartoes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.cartao {
+  @include cartao;
+  min-width: 0;
+  padding: 14px 10px;
+  border-top: 6px solid var(--cor);
+  text-align: center;
+
+  h3 {
+    color: var(--cor);
+    font-size: 1.1rem;
+  }
+}
+
+.pontos {
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-top: 4px;
+
+  small {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: $texto-suave;
+  }
+}
+
+.semana {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--cor);
+  margin-top: 4px;
+}
+
+.numeros {
+  margin: 14px 0 0;
+  display: grid;
+  gap: 6px;
+  text-align: left;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+    background: $lilas;
+    border-radius: 10px;
+    padding: 6px 8px;
+    font-size: 0.75rem;
+  }
+
+  dt {
+    color: $texto-suave;
+  }
+
+  dd {
+    margin: 0;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+}
+
+.metas {
+  @include cartao;
+  display: grid;
+  gap: 12px;
+
+  h3 {
+    font-size: 1rem;
+  }
+}
+
+.sub {
+  font-size: 0.75rem;
+  color: $texto-suave;
+  margin-top: -8px;
+}
+
+.meta {
+  display: grid;
+  gap: 4px;
+}
+
+.nomeMeta {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.linhaBarra {
+  display: grid;
+  grid-template-columns: 16px 1fr 40px;
+  align-items: center;
+  gap: 8px;
+}
+
+.inicial {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--cor);
+}
+
+.barra {
+  height: 8px;
+  background: $lilas;
+  border-radius: $raio-pill;
+  overflow: hidden;
+
+  div {
+    height: 100%;
+    background: var(--cor);
+    border-radius: inherit;
+    transition: width 0.4s ease;
+  }
+}
+
+.pct {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: right;
+  color: $texto-suave;
+}
+
+.regras {
+  margin: 12px 4px 0;
+  font-size: 0.72rem;
+  color: $texto-suave;
+  line-height: 1.5;
+}
+
+.erro {
+  background: $vermelho-claro;
+  color: $vermelho;
+  padding: 10px 12px;
+  border-radius: 12px;
+}
+
+// celular estreito: rótulo em cima, número embaixo
+@media (max-width: 420px) {
+  .numeros div {
+    flex-direction: column;
+    gap: 0;
+  }
+}

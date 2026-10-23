@@ -1,0 +1,97 @@
+@use '../../styles/tokens' as *;
+
+.linha {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: $lilas;
+  transition: background 0.2s;
+
+  &[data-status='cumpriu'] {
+    background: $verde-claro;
+  }
+  &[data-status='falhou'] {
+    background: $vermelho-claro;
+  }
+}
+
+.texto {
+  flex: 1;
+  display: grid;
+  min-width: 0;
+}
+
+.titulo {
+  font-weight: 500;
+  font-size: 0.92rem;
+}
+
+.detalhe {
+  font-size: 0.72rem;
+  color: $texto-suave;
+}
+
+.botoes {
+  display: flex;
+  gap: 6px;
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border: 2px solid transparent;
+    background: $branco;
+    border-radius: $raio-pill;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: $cinza;
+    transition: all 0.15s;
+
+    span {
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  .cumpriu[aria-pressed='true'] {
+    background: $verde;
+    color: $branco;
+  }
+  .falhou[aria-pressed='true'] {
+    background: $vermelho;
+    color: $branco;
+  }
+  .cumpriu:hover {
+    border-color: $verde;
+  }
+  .falhou:hover {
+    border-color: $vermelho;
+  }
+}
+
+// No celular bem estreito, mostra só os ícones
+@media (max-width: 380px) {
+  .botoes button span {
+    display: none;
+  }
+}
+
+.selo {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: $texto-suave;
+
+  [data-status='cumpriu'] > & {
+    color: $verde-escuro;
+  }
+  [data-status='falhou'] > & {
+    color: $vermelho;
+  }
+}

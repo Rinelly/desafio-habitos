@@ -1,0 +1,76 @@
+@use '../../styles/tokens' as *;
+
+.painel {
+  @include cartao;
+  border-top: 6px solid var(--cor);
+  display: grid;
+  gap: 16px;
+  align-content: start;
+
+  // No celular mostra uma pessoa por vez; no computador, as duas lado a lado
+  &[data-oculto='true'] {
+    display: none;
+  }
+  @media (min-width: $quebra-colunas) {
+    &[data-oculto='true'] {
+      display: grid;
+    }
+  }
+}
+
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h3 {
+    font-size: 1.25rem;
+    color: var(--cor);
+  }
+  p {
+    font-size: 0.75rem;
+    color: $texto-suave;
+  }
+}
+
+.placar {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+
+  strong {
+    position: relative;
+    z-index: 1;
+    font-size: 0.85rem;
+  }
+}
+
+// anel de progresso feito com conic-gradient
+.anel {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(var(--cor) var(--pct), $lilas-medio 0);
+  mask: radial-gradient(circle, transparent 58%, #000 60%);
+}
+
+.grupo {
+  display: grid;
+  gap: 6px;
+
+  h4 {
+    margin: 0 0 2px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: $texto-suave;
+  }
+}
+
+.vazio {
+  font-size: 0.8rem;
+  color: $texto-suave;
+}

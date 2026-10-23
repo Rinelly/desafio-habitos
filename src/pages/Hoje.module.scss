@@ -1,0 +1,50 @@
+@use '../styles/tokens' as *;
+
+.alternador {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  background: $branco;
+  border-radius: $raio-pill;
+  padding: 4px;
+  margin-bottom: 12px;
+  box-shadow: $sombra;
+
+  button {
+    border: none;
+    background: transparent;
+    border-radius: $raio-pill;
+    padding: 8px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: $texto-suave;
+
+    &[aria-selected='true'] {
+      background: var(--cor);
+      color: $branco;
+    }
+  }
+
+  @media (min-width: $quebra-colunas) {
+    display: none;
+  }
+}
+
+.colunas {
+  display: grid;
+  gap: 16px;
+
+  @media (min-width: $quebra-colunas) {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.erro {
+  background: $vermelho-claro;
+  color: $vermelho;
+  font-size: 0.85rem;
+  padding: 10px 12px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}

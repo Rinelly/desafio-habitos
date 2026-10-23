@@ -1,0 +1,135 @@
+@use '../styles/tokens' as *;
+
+.pagina {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  // "blobs" lilás decorativos nos cantos
+  background:
+    radial-gradient(circle at 0% 0%, rgba($roxo, 0.22) 0 160px, transparent 161px),
+    radial-gradient(circle at 100% 100%, rgba($roxo, 0.18) 0 200px, transparent 201px),
+    $lilas;
+}
+
+.cartao {
+  @include cartao;
+  width: 100%;
+  max-width: 400px;
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.rotulo {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $roxo;
+}
+
+.titulo {
+  font-size: 2rem;
+  font-weight: 700;
+
+  span {
+    color: $roxo;
+  }
+}
+
+.sub {
+  color: $texto-suave;
+  margin-top: 4px;
+  font-size: 0.92rem;
+}
+
+.abas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: $lilas;
+  border-radius: $raio-pill;
+  padding: 4px;
+  margin: 24px 0 16px;
+
+  button {
+    border: none;
+    background: transparent;
+    padding: 8px;
+    border-radius: $raio-pill;
+    font-weight: 600;
+    color: $texto-suave;
+  }
+
+  .ativa {
+    background: $branco;
+    color: $roxo;
+    box-shadow: $sombra;
+  }
+}
+
+.form {
+  display: grid;
+  gap: 12px;
+  text-align: left;
+
+  label {
+    display: grid;
+    gap: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  input {
+    border: 2px solid $lilas-medio;
+    border-radius: 12px;
+    padding: 10px 12px;
+    background: $branco;
+
+    &:focus {
+      outline: none;
+      border-color: $roxo;
+    }
+  }
+}
+
+.botao {
+  margin-top: 4px;
+  border: none;
+  border-radius: $raio-pill;
+  background: $roxo;
+  color: $branco;
+  font-weight: 600;
+  padding: 12px;
+
+  &:hover:not(:disabled) {
+    background: $roxo-escuro;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+}
+
+.erro,
+.aviso {
+  font-size: 0.85rem;
+  padding: 10px 12px;
+  border-radius: 12px;
+}
+
+.erro {
+  background: $vermelho-claro;
+  color: $vermelho;
+}
+
+.aviso {
+  background: $verde-claro;
+  color: $verde-escuro;
+}
+
+.dica {
+  margin-top: 16px;
+  font-size: 0.8rem;
+  color: $texto-suave;
+}

@@ -1,0 +1,40 @@
+@use '../../styles/tokens' as *;
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  gap: 6px;
+}
+
+.miniatura {
+  aspect-ratio: 1;
+  padding: 0;
+  border: 3px solid transparent;
+  border-radius: 12px;
+  overflow: hidden;
+  background: $lilas-medio;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+.placeholder {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, $lilas-medio, $lilas, $lilas-medio);
+  background-size: 200% 100%;
+  animation: brilho 1.2s infinite linear;
+}
+
+@keyframes brilho {
+  to { background-position: -200% 0; }
+}

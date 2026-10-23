@@ -1,0 +1,83 @@
+@use '../../styles/tokens' as *;
+
+.tabela {
+  display: grid;
+  gap: 4px;
+  font-size: 0.85rem;
+}
+
+.cabecalho,
+.linha {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1.1fr;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+
+.cabecalho {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: $texto-suave;
+
+  small {
+    display: block;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+}
+
+.linha {
+  background: $lilas;
+
+  small {
+    color: $texto-suave;
+    font-size: 0.7rem;
+  }
+}
+
+.nome {
+  font-weight: 500;
+}
+
+.selo {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: $raio-pill;
+  font-weight: 700;
+  font-size: 0.75rem;
+  white-space: nowrap;
+
+  &[data-estado='melhorou'] {
+    background: $verde-claro;
+    color: $verde-escuro;
+  }
+  &[data-estado='piorou'] {
+    background: $vermelho-claro;
+    color: $vermelho;
+  }
+  &[data-estado='igual'] {
+    background: $branco;
+    color: $texto-suave;
+  }
+}
+
+.dica,
+.vazio {
+  font-size: 0.8rem;
+  color: $texto-suave;
+  margin-top: 6px;
+}
+
+@media (max-width: 400px) {
+  .cabecalho,
+  .linha {
+    grid-template-columns: 1.1fr 0.9fr 0.9fr 1.1fr;
+    padding: 8px 6px;
+    font-size: 0.78rem;
+  }
+}

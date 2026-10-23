@@ -1,0 +1,189 @@
+@use '../styles/tokens' as *;
+
+$cores: (
+  perfeito: $verde,
+  parcial: $amarelo,
+  falha: $vermelho,
+  vazio: #d6d3e4,
+  futuro: transparent,
+);
+
+.titulo {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.legenda {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  font-size: 0.75rem;
+  color: $texto-suave;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
+
+.bolinha {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+}
+
+.inicial {
+  font-weight: 700;
+  color: var(--cor);
+}
+
+@each $estado, $cor in $cores {
+  .bolinha[data-estado='#{$estado}'],
+  .marca[data-estado='#{$estado}'] {
+    background: $cor;
+  }
+}
+
+.cartao {
+  @include cartao;
+  padding: 12px 10px;
+  display: grid;
+  gap: 10px;
+}
+
+.cabecalho,
+.dias {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.cabecalho span {
+  text-align: center;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: $texto-suave;
+}
+
+.semana {
+  display: grid;
+  gap: 4px;
+}
+
+.rotuloSemana {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: $texto-suave;
+  padding: 0 2px;
+}
+
+.treinos {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  [data-bateu='true']::after {
+    content: ' ✓';
+  }
+}
+
+.dia {
+  aspect-ratio: 1 / 1.05;
+  min-width: 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: $lilas;
+  padding: 4px 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  &:hover:not(:disabled) {
+    border-color: $lilas-medio;
+  }
+
+  &:disabled {
+    background: transparent;
+    border: 2px dashed $lilas-medio;
+    cursor: default;
+    opacity: 0.6;
+  }
+
+  &[data-hoje='true'] {
+    border-color: $roxo;
+  }
+}
+
+.numero {
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.1;
+  display: grid;
+  justify-items: center;
+
+  small {
+    font-size: 0.55rem;
+    font-weight: 500;
+    color: $roxo;
+    text-transform: uppercase;
+  }
+}
+
+.pessoas {
+  display: flex;
+  gap: 2px;
+}
+
+.marca {
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+  font-size: 0.55rem;
+  font-weight: 700;
+  color: $branco;
+  display: grid;
+  place-items: center;
+
+  &[data-estado='vazio'],
+  &[data-estado='parcial'] {
+    color: $texto;
+  }
+  &[data-estado='futuro'] {
+    color: $cinza;
+  }
+}
+
+@media (min-width: 600px) {
+  .marca {
+    width: 22px;
+    height: 22px;
+    font-size: 0.7rem;
+  }
+  .numero {
+    font-size: 0.95rem;
+  }
+}
+
+.dica {
+  margin-top: 10px;
+  font-size: 0.75rem;
+  color: $texto-suave;
+  text-align: center;
+}
+
+.erro {
+  background: $vermelho-claro;
+  color: $vermelho;
+  padding: 10px 12px;
+  border-radius: 12px;
+}

@@ -1,0 +1,33 @@
+// Tokens de design — use via @use '../styles/tokens' as *;
+
+$roxo: #6c5ce7;
+$roxo-escuro: #5541d7;
+$lilas: #f3f0ff;
+$lilas-medio: #e4ddff;
+
+$verde: #00b894;
+$verde-claro: #e3f9f2;
+$verde-escuro: #00876c;
+$vermelho: #e5484d;
+$vermelho-claro: #fdecec;
+$amarelo: #fdcb6e;
+$cinza: #8a8aa3;
+
+$texto: #1e1b2e;
+$texto-suave: #6b6880;
+$branco: #ffffff;
+
+$raio: 16px;
+$raio-pill: 999px;
+$sombra: 0 4px 18px rgba(108, 92, 231, 0.10);
+
+$largura-max: 1040px;
+$quebra-colunas: 860px; // a partir daqui, Nelly e Anne lado a lado
+$altura-nav: 68px;
+
+@mixin cartao {
+  background: $branco;
+  border-radius: $raio;
+  box-shadow: $sombra;
+  padding: 16px;
+}
