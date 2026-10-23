@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import type { Session } from '@supabase/supabase-js'
 import { supabase } from '../lib/supabase'
+import { gravarCache, lerCache, limparCache } from '../lib/cache'
 import type { Participante } from '../types'
 
 interface AuthValue {
@@ -49,20 +50,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => data.subscription.unsubscribe()
   }, [])
 
-  // 2) Quando há usuária logada: vincula o user_id e busca as participantes
+  // 2) Quando há usuária logada: busca as participantes.
+  //    Usa o cache para abrir na hora e só chama o "vincular" se ainda não estiver vinculada.
   const userId = session?.user.id
+  const chaveCache = userId ? `participantes:${userId}` : ''
   useEffect(() => {
     if (!userId) return
     let cancelado = false
     ;(async () => {
-      await supabase.rpc('desafio_vincular_usuario')
+      const emCache = lerCache<Participante[]>(`participantes:${userId}`)
+      const jaVinculada = emCache?.some((p) => p.user_id === userId)
+      if (!jaVinculada) await supabase.rpc('desafio_vincular_usuario')
       const { data, error } = await supabase
         .from('desafio_participantes')
         .select('email, nome, cor, user_id')
         .order('nome')
       if (cancelado) return
       if (error) console.error('Erro ao buscar participantes:', error.message)
-      setParticipantes(data ?? [])
+      if (data) gravarCache(`participantes:${userId}`, data)
+      setParticipantes(data ?? emCache ?? [])
       setCarregadoPara(userId)
     })()
     return () => {
@@ -71,13 +77,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [userId])
 
   // Só vale a lista carregada para a usuária atual (evita dados de quem saiu)
-  const lista = userId && carregadoPara === userId ? participantes : []
+  const lista =
+    userId && carregadoPara === userId
+      ? participantes
+      : (chaveCache && lerCache<Participante[]>(chaveCache)) || []
   const eu = lista.find((p) => p.user_id === userId) ?? null
   const ordenadas = eu ? [eu, ...lista.filter((p) => p !== eu)] : lista
 
   const value: AuthValue = {
     session,
-    carregando: !sessaoPronta || (!!userId && carregadoPara !== userId),
+    carregando: !sessaoPronta || (!!userId && carregadoPara !== userId && lista.length === 0),
     eu,
     participantes: ordenadas,
     async entrar(email, senha) {
@@ -102,6 +111,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     },
     async sair() {
       await supabase.auth.signOut()
+      limparCache()
     },
   }
 

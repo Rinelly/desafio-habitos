@@ -3,12 +3,13 @@ import {
   apagarMedicao,
   buscarMedicoes,
   enviarFotoMedida,
-  gerarLinks,
   removerArquivos,
   salvarMedicao,
   type DadosMedicao,
 } from '../lib/api'
 import { comprimirImagem } from '../lib/imagem'
+import { gravarCache, lerCache } from '../lib/cache'
+import { linksEmCache, obterLinks } from '../lib/links'
 import { POSES, type CampoMedida, type Pose } from '../lib/medidas'
 import type { Medicao } from '../types'
 
@@ -28,20 +29,28 @@ export interface FormMedicao {
 }
 
 export function useMedicoes(userId: string) {
-  const [medicoes, setMedicoes] = useState<Medicao[] | null>(null)
-  const [links, setLinks] = useState<Record<string, string>>({})
+  // começa pelo cache para a tela abrir na hora
+  const [medicoes, setMedicoes] = useState<Medicao[] | null>(() => lerCache<Medicao[]>('medicoes') ?? null)
+  const [links, setLinks] = useState<Record<string, string>>(() =>
+    linksEmCache(
+      (lerCache<Medicao[]>('medicoes') ?? [])
+        .flatMap((m) => POSES.map((p) => m[p.chave]))
+        .filter((c): c is string => !!c),
+    ),
+  )
   const [erro, setErro] = useState<string | null>(null)
   const [salvando, setSalvando] = useState(false)
 
   const atualizarLinks = useCallback(async (lista: Medicao[]) => {
     const caminhos = lista.flatMap((m) => POSES.map((p) => m[p.chave])).filter((c): c is string => !!c)
-    const novos = await gerarLinks(caminhos)
+    const novos = await obterLinks(caminhos)
     setLinks((atual) => ({ ...atual, ...novos }))
   }, [])
 
   const recarregar = useCallback(async () => {
     try {
       const lista = await buscarMedicoes()
+      gravarCache('medicoes', lista)
       setMedicoes(lista)
       await atualizarLinks(lista)
       setErro(null)

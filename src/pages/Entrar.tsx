@@ -98,7 +98,7 @@ export function Entrar() {
 
         <p className={styles.dica}>
           {modo === 'entrar'
-            ? 'Já usa o Pomodoro? Entre com a mesma conta.'
+            ? 'Já usa o Foco? Entre com a mesma conta.'
             : 'Use o mesmo e-mail cadastrado no desafio.'}
         </p>
       </div>

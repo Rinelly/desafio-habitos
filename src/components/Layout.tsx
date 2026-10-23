@@ -1,4 +1,7 @@
+import { useEffect } from 'react'
 import { NavLink, Outlet } from 'react-router-dom'
+import { gravarCache } from '../lib/cache'
+import { buscarTodosRegistros } from '../hooks/useTodosRegistros'
 import { useAuth } from '../contexts/AuthContext'
 import { TOTAL_DIAS, hoje, numeroDoDia } from '../lib/desafio'
 import styles from './Layout.module.scss'
@@ -21,6 +24,16 @@ function textoProgresso(): { texto: string; pct: number } {
 export function Layout() {
   const { eu, sair } = useAuth()
   const { texto, pct } = textoProgresso()
+
+  // Adianta os dados do Calendário/Placar em segundo plano, para essas abas abrirem na hora
+  useEffect(() => {
+    const t = window.setTimeout(() => {
+      buscarTodosRegistros()
+        .then((r) => gravarCache('registros:todos', r))
+        .catch(() => {})
+    }, 1500)
+    return () => window.clearTimeout(t)
+  }, [])
 
   return (
     <div className={styles.app}>
