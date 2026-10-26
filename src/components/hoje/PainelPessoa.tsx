@@ -8,11 +8,12 @@ import { GradeFotos } from '../fotos/GradeFotos'
 import { AdicionarFoto } from '../fotos/AdicionarFoto'
 import styles from './PainelPessoa.module.scss'
 
+// Ordem em que aparecem na tela (o lembrete vem primeiro: é o que se faz ao acordar)
 const CATEGORIAS: { chave: Categoria; titulo: string; icone: string }[] = [
+  { chave: 'lembrete', titulo: 'Ao acordar', icone: '🌅' },
   { chave: 'alimentacao', titulo: 'Alimentação', icone: '🥗' },
   { chave: 'agua', titulo: 'Hidratação', icone: '💧' },
   { chave: 'treino', titulo: 'Treino', icone: '💪' },
-  { chave: 'lembrete', titulo: 'Lembretes · não contam pontos', icone: '🔔' },
 ]
 
 interface Props {
