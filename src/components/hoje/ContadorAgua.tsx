@@ -59,7 +59,7 @@ export function ContadorAgua({ litros, alvo, editavel, emAndamento, onSalvar }: 
     ? 'Meta batida! 💧'
     : emAndamento
       ? `Faltam ${formatar(alvo - valor)}`
-      : 'Não chegou nos 3 L'
+      : `Não chegou nos ${formatar(alvo)}`
 
   return (
     <div className={styles.agua} data-estado={estado}>

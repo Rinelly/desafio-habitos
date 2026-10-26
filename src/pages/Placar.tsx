@@ -4,6 +4,7 @@ import { useMetas } from '../hooks/useMetas'
 import { useTodosRegistros } from '../hooks/useTodosRegistros'
 import { diaPadrao, hoje } from '../lib/desafio'
 import { BONUS_SEMANA_TREINO, calcularPlacar } from '../lib/placar'
+import { metasPontuaveis } from '../lib/resumo'
 import { Carregando } from '../components/Carregando'
 import styles from './Placar.module.scss'
 
@@ -90,7 +91,7 @@ export function Placar() {
       <article className={styles.metas}>
         <h3>Meta por meta</h3>
         <p className={styles.sub}>% de cumprimento desde 23/10 (treino: comparado a 5 por semana)</p>
-        {metas.map((m) => (
+        {metasPontuaveis(metas).map((m) => (
           <div key={m.chave} className={styles.meta}>
             <span className={styles.nomeMeta}>{m.titulo}</span>
             {placares.map(({ p, placar }) => {

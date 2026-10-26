@@ -5,7 +5,8 @@ export interface Participante {
   user_id: string | null
 }
 
-export type Categoria = 'alimentacao' | 'agua' | 'treino'
+/** 'lembrete' = só para marcar, não conta pontos nem entra no placar */
+export type Categoria = 'alimentacao' | 'agua' | 'treino' | 'lembrete'
 
 export interface Meta {
   chave: string

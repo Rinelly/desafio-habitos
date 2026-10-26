@@ -1,6 +1,6 @@
 // Cálculo do placar de UMA pessoa, a partir de todos os registros dela.
 import { DIAS, limitesDaSemana, semanaDoDesafio } from './desafio'
-import { contarTreinos, metasDiarias, resumirDia } from './resumo'
+import { contarTreinos, metasDiarias, metasPontuaveis, resumirDia } from './resumo'
 import type { Meta, Registro } from '../types'
 
 export const PONTOS_POR_META = 1
@@ -20,7 +20,16 @@ export interface Placar {
   porMeta: { meta: Meta; pct: number; cumpridas: number }[]
 }
 
-export function calcularPlacar(metas: Meta[], registros: Registro[], ultimoDia: string, diaDeHoje: string): Placar {
+export function calcularPlacar(
+  todasAsMetas: Meta[],
+  todosOsRegistros: Registro[],
+  ultimoDia: string,
+  diaDeHoje: string,
+): Placar {
+  // Lembretes (ex.: vacuum) ficam de fora do placar
+  const metas = metasPontuaveis(todasAsMetas)
+  const chaves = new Set(metas.map((m) => m.chave))
+  const registros = todosOsRegistros.filter((r) => chaves.has(r.meta))
   const dias = DIAS.filter((d) => d <= ultimoDia)
   const porDia = new Map<string, Registro[]>()
   for (const r of registros) porDia.set(r.dia, [...(porDia.get(r.dia) ?? []), r])

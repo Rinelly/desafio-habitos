@@ -1,0 +1,59 @@
+@use '../../styles/tokens' as *;
+
+.lembrete {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 2px dashed $lilas-medio;
+  background: $branco;
+  text-align: left;
+  transition: all 0.15s;
+
+  &[data-feito='true'] {
+    border-style: solid;
+    border-color: $roxo;
+    background: $lilas;
+  }
+}
+
+button.lembrete:active {
+  transform: scale(0.98);
+}
+
+.caixa {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  border-radius: 7px;
+  border: 2px solid $lilas-medio;
+  display: grid;
+  place-items: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: $branco;
+
+  [data-feito='true'] & {
+    background: $roxo;
+    border-color: $roxo;
+  }
+}
+
+.titulo {
+  flex: 1;
+  font-weight: 500;
+  font-size: 0.92rem;
+}
+
+.estado {
+  font-size: 0.75rem;
+  color: $texto-suave;
+  font-weight: 500;
+
+  [data-feito='true'] & {
+    color: $roxo;
+    font-weight: 600;
+  }
+}

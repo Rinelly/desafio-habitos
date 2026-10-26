@@ -62,7 +62,7 @@ $$;
 create table if not exists public.desafio_metas (
   chave         text primary key,
   titulo        text not null,
-  categoria     text not null check (categoria in ('alimentacao', 'agua', 'treino')),
+  categoria     text not null check (categoria in ('alimentacao', 'agua', 'treino', 'lembrete')),
   tipo          text not null default 'check' check (tipo in ('check', 'quantidade')),
   alvo          numeric,            -- ex.: 3 (litros)
   unidade       text,               -- ex.: 'L'
@@ -79,10 +79,11 @@ insert into public.desafio_metas
   ('zero_gluten',          'Zero glúten',           'alimentacao', 'check',      null, null, 'diaria',  null, 3),
   ('zero_lactose',         'Zero lactose',          'alimentacao', 'check',      null, null, 'diaria',  null, 4),
   ('zero_ultraprocessados','Zero ultraprocessados', 'alimentacao', 'check',      null, null, 'diaria',  null, 5),
-  ('agua',                 'Água (mín. 3L)',        'agua',        'quantidade', 3,    'L',  'diaria',  null, 6),
+  ('agua',                 'Água (mín. 2,5L)',      'agua',        'quantidade', 2.5,  'L',  'diaria',  null, 6),
   ('treino',               'Treino',                'treino',      'check',      null, null, 'semanal', 5,    7),
   ('cardio',               'Cardio',                'treino',      'check',      null, null, 'diaria',  null, 8),
-  ('abdominal',            'Abdominal',             'treino',      'check',      null, null, 'diaria',  null, 9)
+  ('abdominal',            'Abdominal',             'treino',      'check',      null, null, 'diaria',  null, 9),
+  ('vacuum',               'Vacuum',                'lembrete',    'check',      null, null, 'diaria',  null, 10)
 on conflict (chave) do update set
   titulo = excluded.titulo, categoria = excluded.categoria, tipo = excluded.tipo,
   alvo = excluded.alvo, unidade = excluded.unidade, frequencia = excluded.frequencia,
@@ -228,5 +229,5 @@ create policy "desafio-fotos: apagar" on storage.objects
 -- ---------------------------------------------------------------------
 -- 7) CONFERÊNCIA — rode depois e veja se aparecem 9 metas e 2 participantes
 -- ---------------------------------------------------------------------
--- select * from public.desafio_metas order by ordem;
+-- select * from public.desafio_metas order by ordem;  (10 linhas: 9 metas + o lembrete do vacuum)
 -- select email, nome, user_id from public.desafio_participantes;

@@ -10,8 +10,15 @@ export interface ResumoDia {
   estado: EstadoDia
 }
 
-/** Metas que contam todo dia (o treino é semanal, então não entra aqui). */
-export const metasDiarias = (metas: Meta[]) => metas.filter((m) => m.frequencia === 'diaria')
+/** Lembretes (ex.: vacuum) só servem para marcar: não contam pontos, nem dia perfeito. */
+export const ehLembrete = (m: Meta) => m.categoria === 'lembrete'
+
+/** Metas que valem para o placar. */
+export const metasPontuaveis = (metas: Meta[]) => metas.filter((m) => !ehLembrete(m))
+
+/** Metas que contam todo dia (o treino é semanal e os lembretes não contam). */
+export const metasDiarias = (metas: Meta[]) =>
+  metasPontuaveis(metas).filter((m) => m.frequencia === 'diaria')
 
 /**
  * Resume um dia de UMA pessoa.
@@ -19,7 +26,7 @@ export const metasDiarias = (metas: Meta[]) => metas.filter((m) => m.frequencia 
  * - falha:    falhou em pelo menos uma
  * - parcial:  sem falhas, mas ainda falta marcar alguma
  * - vazio:    nada registrado
- * No dia de hoje, a água abaixo de 3 L ainda não conta como falha (o dia não acabou).
+ * No dia de hoje, a água abaixo da meta ainda não conta como falha (o dia não acabou).
  */
 export function resumirDia(metas: Meta[], registrosDoDia: Registro[], ehHoje: boolean): ResumoDia {
   const diarias = metasDiarias(metas)
@@ -38,7 +45,7 @@ export function resumirDia(metas: Meta[], registrosDoDia: Registro[], ehHoje: bo
   const estado: EstadoDia =
     cumpridas === total ? 'perfeito'
     : falhas > 0 ? 'falha'
-    : registrosDoDia.length === 0 ? 'vazio'
+    : !registrosDoDia.some((r) => metas.some((m) => m.chave === r.meta && !ehLembrete(m))) ? 'vazio'
     : 'parcial'
 
   return { cumpridas, falhas, total, estado }
