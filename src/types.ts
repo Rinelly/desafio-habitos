@@ -39,6 +39,18 @@ export interface Foto {
   dia: string
   caminho: string
   legenda: string | null
+  /** caminho da miniatura (null em fotos antigas, até ela ser gerada) */
+  miniatura?: string | null
+  criado_em: string
+  /** quantidade de comentários (vem junto na busca das fotos) */
+  n_comentarios?: number
+}
+
+export interface Comentario {
+  id: string
+  foto_id: string
+  user_id: string
+  texto: string
   criado_em: string
 }
 

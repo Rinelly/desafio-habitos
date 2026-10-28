@@ -28,6 +28,7 @@ export function Hoje() {
   const fotosDoDia = useFotos(dia, dia, meuId)
   const [fotoAberta, setFotoAberta] = useState<Foto | null>(null)
   const nomes = Object.fromEntries(participantes.map((p) => [p.user_id ?? '', p.nome]))
+  const cores = Object.fromEntries(participantes.map((p) => [p.user_id ?? '', p.cor]))
 
   const emAndamento = dia === hoje()
 
@@ -85,7 +86,9 @@ export function Hoje() {
           atual={fotoAberta}
           links={fotosDoDia.links}
           nomes={nomes}
+          cores={cores}
           meuId={meuId}
+          onContagem={fotosDoDia.ajustarContagem}
           onTrocar={setFotoAberta}
           onFechar={() => setFotoAberta(null)}
           onApagar={fotosDoDia.apagar}

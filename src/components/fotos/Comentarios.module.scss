@@ -1,0 +1,98 @@
+@use '../../styles/tokens' as *;
+
+.comentarios {
+  display: grid;
+  gap: 8px;
+  color: $branco;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+  }
+
+  li {
+    background: rgba(255, 255, 255, 0.1);
+    border-left: 3px solid var(--cor);
+    border-radius: 10px;
+    padding: 8px 10px;
+
+    p {
+      margin-top: 2px;
+      font-size: 0.88rem;
+      line-height: 1.4;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+  }
+}
+
+.cabeca {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 0.75rem;
+
+  strong {
+    color: var(--cor);
+    filter: brightness(1.4);
+  }
+
+  span {
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  button {
+    margin-left: auto;
+    border: none;
+    background: none;
+    padding: 0;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.72rem;
+    text-decoration: underline;
+  }
+}
+
+.info {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.erro {
+  font-size: 0.8rem;
+  color: #ffb3b5;
+}
+
+.form {
+  display: flex;
+  gap: 6px;
+
+  input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    border-radius: $raio-pill;
+    padding: 10px 14px;
+    background: $branco;
+    color: $texto;
+
+    &:focus {
+      outline: 2px solid $roxo;
+    }
+  }
+
+  button {
+    border: none;
+    border-radius: $raio-pill;
+    padding: 0 16px;
+    font-weight: 600;
+    background: $roxo;
+    color: $branco;
+
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+}

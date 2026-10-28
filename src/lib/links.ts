@@ -1,11 +1,11 @@
 // Links temporários das fotos (o bucket é privado).
-// O Supabase gera links válidos por 1h; guardamos no cache e reaproveitamos
-// enquanto ainda faltam mais de 10 minutos para expirar.
-import { gerarLinks } from './api'
+// O Supabase gera links válidos por 24h; guardamos no cache e reaproveitamos.
+// Como o link fica igual, o navegador usa a imagem que já baixou (sem gastar egress).
+import { VALIDADE_LINK_S, gerarLinks } from './api'
 import { gravarCache, lerCache } from './cache'
 
-const VALIDADE_MS = 60 * 60 * 1000
-const MARGEM_MS = 10 * 60 * 1000
+const VALIDADE_MS = VALIDADE_LINK_S * 1000
+const MARGEM_MS = 60 * 60 * 1000 // renova quando falta menos de 1h
 
 type Guardados = Record<string, { url: string; expira: number }>
 

@@ -20,10 +20,15 @@ export function GradeFotos({ fotos, links, onAbrir, corPorUsuaria }: Props) {
           style={corPorUsuaria ? { borderColor: corPorUsuaria[f.user_id] } : undefined}
           aria-label={f.legenda ? `Abrir foto: ${f.legenda}` : 'Abrir foto'}
         >
-          {links[f.caminho] ? (
-            <img src={links[f.caminho]} alt={f.legenda ?? ''} loading="lazy" />
+          {links[f.miniatura ?? f.caminho] ? (
+            <img src={links[f.miniatura ?? f.caminho]} alt={f.legenda ?? ''} loading="lazy" />
           ) : (
             <span className={styles.placeholder} />
+          )}
+          {!!f.n_comentarios && (
+            <span className={styles.contador} aria-label={`${f.n_comentarios} comentários`}>
+              💬 {f.n_comentarios}
+            </span>
           )}
         </button>
       ))}

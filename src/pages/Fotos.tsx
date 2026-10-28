@@ -14,7 +14,11 @@ export function Fotos() {
   const { participantes, eu } = useAuth()
   const meuId = eu!.user_id!
   const hojeDesafio = diaPadrao()
-  const { fotos, links, carregando, enviando, erro, enviar, apagar } = useFotos(INICIO, hojeDesafio, meuId)
+  const { fotos, links, carregando, enviando, erro, enviar, apagar, ajustarContagem } = useFotos(
+    INICIO,
+    hojeDesafio,
+    meuId,
+  )
   const [filtro, setFiltro] = useState<string>('todas') // 'todas' ou user_id
   const [aberta, setAberta] = useState<Foto | null>(null)
 
@@ -77,7 +81,9 @@ export function Fotos() {
           atual={aberta}
           links={links}
           nomes={nomes}
+          cores={cores}
           meuId={meuId}
+          onContagem={ajustarContagem}
           onTrocar={setAberta}
           onFechar={() => setAberta(null)}
           onApagar={apagar}
